@@ -1,4 +1,4 @@
-name: test-runner-simple
+name: Environment Check
 on: 
   push:
     branches: [ "dev", "qa", "prod" ]
