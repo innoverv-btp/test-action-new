@@ -1,7 +1,7 @@
-name: test-runner-simple
+name: Environment Check
 on: 
   push:
-    branches: [ "dev" ]
+    branches: [ "dev", "qa", "prod" ]
   workflow_dispatch: 
     inputs:
       environment:
