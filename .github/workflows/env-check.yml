@@ -1,0 +1,31 @@
+name: test-runner-simple
+on: 
+  push:
+    branches: [ "dev" ]
+  workflow_dispatch: 
+    inputs:
+      environment:
+        description: "Environment"
+        required: true
+        type: choice
+        options:
+          - dev
+          - qa
+          - prod
+  
+
+jobs:
+  execute-win-runner:
+    runs-on: test-runner-win11
+    environment: ${{ 
+      github.event_name == 'workflow_dispatch' 
+        && github.event.inputs.environment 
+        || github.ref_name 
+      }}
+    steps:
+      - name: first-step
+        run: |
+          echo "This is a test - step 1"
+          echo "Event: ${{ github.event_name }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "CREDS: ${{ secrets.CREDS }}"
